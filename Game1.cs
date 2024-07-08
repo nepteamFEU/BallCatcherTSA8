@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Reflection.Emit;
 
 namespace BallCatcher
 {
@@ -12,6 +13,8 @@ namespace BallCatcher
         Platform platform1;
         Platform platform2;
         public Ball ball;
+        Label player1, player2;
+        Vector2 p1, p2;
 
         public Game1()
         {
@@ -24,6 +27,8 @@ namespace BallCatcher
         {
             speed = 9; // Initialize speed before creating platform instances
 
+            
+
             ball = new Ball(Content.Load<Texture2D>("Untitled"), Color.Red, new Rectangle(200, 200, 50, 50),
                 5, 5, Window.ClientBounds.Width, Window.ClientBounds.Height, true, true);
 
@@ -33,6 +38,8 @@ namespace BallCatcher
             platform2 = new Platform(Content.Load<Texture2D>("player2"),
                 new Rectangle(Window.ClientBounds.Width - 50, Window.ClientBounds.Height - 150, 50, 150),
                 Color.Blue, 0, Window.ClientBounds.Height, speed);
+
+            player1 = new Label(0, "Score:", "0", (100, 100), "Arial", Color.Black);
 
             base.Initialize();
         }
