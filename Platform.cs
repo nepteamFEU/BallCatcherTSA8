@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -31,25 +27,20 @@ namespace BallCatcher
         public Rectangle PlatRec { get => platRec; set => this.platRec = value; }
         public Color PlatColor { get => platColor; set => this.platColor = value; }
 
-        public void platformMovement(Keys controls, int player)
+        public void platformMovement(Keys upKey, Keys downKey)
         {
-            if (player == 1)
-            {
-                if (controls == Keys.Up && platRec.X > boundTop)
-                { platRec.Y -= speed; }
-                if (controls == Keys.Down && platRec.Y > boundBottom)
-                { platRec.Y += speed; }
-            }
-            if (player == 2)
-            {
-                if (controls == Keys.W && platRec.X > boundTop)
-                { platRec.Y -= speed; }
-                if (controls == Keys.S && platRec.Y > boundBottom)
-                { platRec.Y += speed; }
-            }
+            KeyboardState state = Keyboard.GetState();
 
+            if (state.IsKeyDown(upKey) && platRec.Y > boundTop)
+            {
+                platRec.Y -= speed;
+            }
+            if (state.IsKeyDown(downKey) && (platRec.Y + platRec.Height) < boundBottom)
+            {
+                platRec.Y += speed;
+            }
         }
 
-        public int speedSet { get => speed;set => this.speed = value; }
+        public int speedSet { get => speed; set => this.speed = value; }
     }
 }
